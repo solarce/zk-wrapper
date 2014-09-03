@@ -1,0 +1,24 @@
+---
+driver:
+  name: ec2
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
+  ssh_key: <%= File.expand_path('~/.ssh/id_rsa') %>
+  security_group_ids: 
+  subnet_id: 
+  region: us-west-2
+  availability_zone: us-west-2a
+  require_chef_omnibus: true
+
+
+platforms:
+  - name: ubuntu-12.04
+    driver:
+      image_id: ami-e6f36fd6
+      username: ubuntu
+
+suites:
+  - name: default
+    run_list:
+      - recipe[zk-wrapper::default]
